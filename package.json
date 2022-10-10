@@ -3,14 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "test": "mocha src/tests/*.test.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chai": "^4.3.6",
     "mocha": "^10.0.0",
-    "sequelize": "^6.24.0"
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.11.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.5.1"
   }
 }
