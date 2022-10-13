@@ -33,3 +33,5 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Documento;
 };
+
+module.exports.TIPO_DOCUMENTO = {'VENTA':0, 'COMPRA':1, 'PEDIDO':2};
