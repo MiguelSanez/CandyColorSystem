@@ -1,13 +1,16 @@
-const { UsersController } = require('./controllers');
+const { UsersController, AuthController } = require('./controllers');
 
 const registerRoutes = (app) => {
-    const controller = new UsersController();
+    const auth = new AuthController();
+    const users = new UsersController();
 
-    app.get('/users/:id', controller.find);
-    app.get('/users', controller.find);
-    app.post('/users', controller.add);
-    app.put('/users/:id', controller.update);
-    app.delete('/users/:id', controller.delete);
+    app.post('/auth/login', auth.login);
+
+    app.get('/users/:id', users.find);
+    app.get('/users', users.find);
+    app.post('/users', users.add);
+    app.put('/users/:id', users.update);
+    app.delete('/users/:id', users.delete);
 }
 
 module.exports = { registerRoutes }

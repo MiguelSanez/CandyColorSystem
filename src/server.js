@@ -8,6 +8,11 @@ const spawnServer = () => {
 
     app.use(bodyParser.json());
 
+    app.use(function (req, res, next) {
+        console.log('Time:', Date.now());
+        next();
+    });
+
     registerRoutes(app);
 
     app.listen(port, () => {

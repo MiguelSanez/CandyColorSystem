@@ -15,6 +15,15 @@ class UsersRepository {
         return user;
     }
 
+    async findUserByUsername(usuario) {
+        const user = await db.usuario.findOne({
+            where: { usuario },
+            attributes: { include: ['password'] }
+        });
+
+        return user;
+    }
+
     async add(user) {
         user.id = 0;
         return (await user.save());
