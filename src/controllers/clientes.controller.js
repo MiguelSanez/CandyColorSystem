@@ -9,64 +9,67 @@ class ClientesController {
         const { id } = req.params;
 
         if (typeof id === 'string' && id.length > 0) {
-            const user = await repo.findUserById(id);
-            if (!user) {
+            const cliente = await repo.findOneById(id);
+            if (!cliente) {
                 res.json({ message: 'Not found' }, 404);
                 return;
             }
 
-            res.json(user);
+            res.json(cliente);
             return;
         }
 
-        const users = await repo.find();
-        res.json(users);
+        const clientes = await repo.find();
+        res.json(clientes);
     }
 
     async add(req, res) {
-        const user = new db.usuario();
-        user.nombre = req.body.nombre;
-        user.tipoUsuario = 0;
-        user.usuario = req.body.usuario;
-        user.password = bcrypt.hashSync(req.body.password);
-        await repo.add(user);
+        const cliente = new db.cliente();
+        cliente.nombre = req.body.nombre;
+        cliente.rfc = req.body.rfc;
+        cliente.telefono = req.body.telefono;
+        cliente.calle = req.body.calle;
+        cliente.numero = req.body.numero;
+        cliente.colonia = req.body.colonia;
+        cliente.codigoPostal = req.body.codigoPostal;
+        await repo.add(cliente);
 
-        const json = user.toJSON();
-        delete json.password;
+        const json = cliente.toJSON();
         res.json(json);
     }
 
     async update(req, res) {
         const { id } = req.params;
 
-        const user = await repo.findUserById(id);
-        if (!user) {
+        const cliente = await repo.findUserById(id);
+        if (!cliente) {
             res.json({ message: 'Not found' }, 404);
             return;
         }
-        user.nombre = req.body.nombre;
-        user.tipoUsuario = 0;
-        user.usuario = req.body.usuario;
-        if (typeof req.body.password === 'string' && req.body.password.length > 0)
-            user.password = bcrypt.hashSync(req.body.password);
+        cliente.nombre = req.body.nombre;
+        cliente.rfc = req.body.rfc;
+        cliente.telefono = req.body.telefono;
+        cliente.calle = req.body.calle;
+        cliente.numero = req.body.numero;
+        cliente.colonia = req.body.colonia;
+        cliente.codigoPostal = req.body.codigoPostal;
+       
+        await repo.update(cliente);
 
-        await repo.update(user);
-
-        const json = user.toJSON();
-        delete json.password;
+        const json = cliente.toJSON();
         res.json(json);
     }
 
     async delete(req, res) {
         const { id } = req.params;
 
-        const user = await repo.findUserById(id);
-        if (!user) {
+        const cliente = await repo.findUserById(id);
+        if (!cliente) {
             res.json({ message: 'Not found' }, 404);
             return;
         }
 
-        await repo.delete(user);
+        await repo.delete(cliente);
 
         res.json({ deleted: true }, 200);
     }
