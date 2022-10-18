@@ -1,4 +1,6 @@
-const db = require('./models');
+const dotenv = require('dotenv');
 const { spawnServer } = require('./server');
+
+dotenv.config();
 
 spawnServer();
