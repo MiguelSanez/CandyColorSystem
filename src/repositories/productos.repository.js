@@ -7,7 +7,7 @@ class ProductosRepository {
         return productos;
     }
 
-    async findProductById(id) {
+    async findOneById(id) {
         const producto = await db.producto.findOne({
             where: { id },
         });

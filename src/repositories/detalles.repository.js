@@ -7,7 +7,7 @@ class DetallesRepository {
         return detalle;
     }
 
-    async findUserById(id) {
+    async findOneById(id) {
         const detalle = await db.detalle.findOne({
             where: { id },
         });

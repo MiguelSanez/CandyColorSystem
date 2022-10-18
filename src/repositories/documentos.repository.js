@@ -7,7 +7,7 @@ class DocumentoRepository {
         return documentos;
     }
 
-    async findUserById(id) {
+    async findOneById(id) {
         const documento = await db.documento.findOne({
             where: { id },
         });
