@@ -1,6 +1,6 @@
 const db = require('./../models');
 
-class DocumentoRepository {
+class DocumentosRepository {
 
     async find() {
         const documentos = await db.documento.findAll();
@@ -34,4 +34,4 @@ class DocumentoRepository {
 
 };
 
-module.exports = DocumentoRepository;
+module.exports = DocumentosRepository;

@@ -71,3 +71,5 @@ class ProductosController {
         res.json({ deleted: true }, 200);
     }
 }
+
+module.exports = ProductosController;

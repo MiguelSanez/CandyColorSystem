@@ -83,3 +83,4 @@ class DocumentosController {
         res.json({ deleted: true }, 200);
     }
 }
+module.exports = DocumentosController;
