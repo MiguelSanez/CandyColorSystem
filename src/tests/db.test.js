@@ -1,3 +1,5 @@
+const { UsersRepository } = require('../repositories');
+
 const db = require('../models');
 const assert = require('assert').strict;
 
@@ -29,10 +31,31 @@ describe('proveedores', function () {
 });
 
 describe('usuarios', function () {
-    it('should not find usuario', async function () {
-        const usuario = await db.usuario.findOne({ where: { id: 'NANANA' } });
-        assert.equal(usuario, null);
+    const repo = new UsersRepository();
+    const usuario = new db.usuario();
+
+    it('should add', async function () {
+        usuario.nombre = 'Prueba';
+        usuario.tipoUsuario = 0;
+        usuario.usuario = 'admin';
+        usuario.password = 'admin';
+        (await repo.add(usuario));
     });
+
+    it('should update', async function () {
+        usuario.nombre = 'Update';
+        (await repo.update(usuario));
+    })
+
+    it('should fetch', async function () {
+        const usuarios = await repo.find();
+        if (!usuarios || usuarios.length <= 0)
+            throw new Error('Expecting to find users.');
+    })
+
+    it('should delete', async function () {
+        await repo.delete(usuario);
+    })
 });
 
 describe('documento', function () {
