@@ -10,6 +10,11 @@ class UsersController {
 
         if (typeof id === 'string' && id.length > 0) {
             const user = await repo.findUserById(id);
+            if (!user) {
+                res.json({ message: 'Not found' }, 404);
+                return;
+            }
+
             res.json(user);
             return;
         }
