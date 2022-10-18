@@ -7,7 +7,7 @@ class ClientesRepository {
         return usuarios;
     }
 
-    async findUserById(id) {
+    async findOneById(id) {
         const cliente = await db.cliente.findOne({
             where: { id },
         });

@@ -1,4 +1,4 @@
-const db = require('./../models');
+const db = require('../models');
 
 class ProveedoresRepository {
 
@@ -7,7 +7,7 @@ class ProveedoresRepository {
         return proveedor;
     }
 
-    async findUserById(id) {
+    async findOneById(id) {
         const proveedor = await db.proveedor.findOne({
             where: { id },
         });

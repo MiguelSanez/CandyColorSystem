@@ -1,15 +1,15 @@
-const { UsersRepository } = require('./../repositories');
+const { ClientesRepository } = require('./../repositories');
 const db = require('./../models');
 const bcrypt = require('bcryptjs');
 
-const repo = new UsersRepository();
+const repo = new ClientesRepository();
 
-class UsersController {
+class ClientesController {
     async find(req, res) {
         const { id } = req.params;
 
         if (typeof id === 'string' && id.length > 0) {
-            const user = await repo.findOneById(id);
+            const user = await repo.findUserById(id);
             if (!user) {
                 res.json({ message: 'Not found' }, 404);
                 return;
@@ -72,4 +72,4 @@ class UsersController {
     }
 }
 
-module.exports = UsersController;
+module.exports = ClientesController;

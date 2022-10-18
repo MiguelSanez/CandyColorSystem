@@ -7,7 +7,7 @@ class UsersRepository {
         return usuarios;
     }
 
-    async findUserById(id) {
+    async findOneById(id) {
         const user = await db.usuario.findOne({
             where: { id },
         });
