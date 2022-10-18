@@ -50,9 +50,9 @@ class DocumentosController {
             res.json({ message: 'Not found' }, 404);
             return;
         }
-        documento.idCliente = req.body.idCliente;
+        documento.idCliente = 0;
         documento.idUsuario = 0;
-        documento.idProveedor = req.body.idProveedor;
+        documento.idProveedor = 0;
         documento.tipoDocumento = 0;
         documento.documentoProveedor = req.body.documentoProveedor;
         documento.status = req.body.status;
