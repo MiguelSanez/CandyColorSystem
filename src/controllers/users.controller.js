@@ -9,7 +9,7 @@ class UsersController {
         const { id } = req.params;
 
         if (typeof id === 'string' && id.length > 0) {
-            const user = await repo.findUserById(id);
+            const user = await repo.findOneById(id);
             if (!user) {
                 res.json({ message: 'Not found' }, 404);
                 return;
