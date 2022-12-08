@@ -21,6 +21,19 @@ class AuthController {
         }, 201);
 
     }
+
+    async checkin(req, res) {
+        if (!req.user) {
+            res.json({ message: 'Unauthenticated' }, 403);
+        }
+        const user = await repo.findUserByUsername(req.user.usuario);
+        if (user) {
+            const u = user.toJSON();
+            delete u.password;
+            return res.json(u, 200);
+        }
+        return res.json({ message: 'Not found' }, 404);
+    }
 }
 
 module.exports = AuthController;

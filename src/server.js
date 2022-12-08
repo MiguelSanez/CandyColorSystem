@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
 const { UsersRepository } = require('./repositories');
 const { registerRoutes } = require('./router');
 
@@ -8,11 +9,12 @@ const usersRepository = new UsersRepository();
 
 const spawnServer = () => {
     const app = express()
-    const port = 8080
+    const port = 3030
 
     app.use(bodyParser.json());
-
+    app.use(cors());
     app.use(async function (req, res, next) {
+
         try {
             const { path } = req;
             const noAuthRequiredRoutes = ['/auth/login'];
@@ -38,6 +40,7 @@ const spawnServer = () => {
                 // Mapear usuario en el request
                 req.user = user;
             } catch (e) {
+                console.log(e);
                 res.json({ message: 'Unauthenticated' }, 403);
                 return;
             }
@@ -49,11 +52,12 @@ const spawnServer = () => {
         }
     });
 
+    registerRoutes(app);
     app.use((err, req, res, next) => {
         res.json({ message: 'Internal server error.' }, 500);
+        next();
     })
 
-    registerRoutes(app);
 
     app.listen(port, () => {
         console.log(`RESTful server running at http://127.0.0.1:${port}`)

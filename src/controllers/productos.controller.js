@@ -33,7 +33,7 @@ class ProductosController {
         await repo.add(producto);
 
         const json = producto.toJSON();
-        res.json(json);
+        res.json(json, 201);
     }
 
     async update(req, res) {
