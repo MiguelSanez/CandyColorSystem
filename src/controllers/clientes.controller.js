@@ -27,6 +27,7 @@ class ClientesController {
         const cliente = new db.cliente();
         cliente.nombre = req.body.nombre;
         cliente.rfc = req.body.rfc;
+        cliente.referencia = req.body.referencia;
         cliente.telefono = req.body.telefono;
         cliente.calle = req.body.calle;
         cliente.numero = req.body.numero;
@@ -48,6 +49,7 @@ class ClientesController {
         }
         cliente.nombre = req.body.nombre;
         cliente.rfc = req.body.rfc;
+        cliente.referencia = req.body.referencia;
         cliente.telefono = req.body.telefono;
         cliente.calle = req.body.calle;
         cliente.numero = req.body.numero;
@@ -63,7 +65,7 @@ class ClientesController {
     async delete(req, res) {
         const { id } = req.params;
 
-        const cliente = await repo.findUserById(id);
+        const cliente = await repo.findOneById(id);
         if (!cliente) {
             res.json({ message: 'Not found' }, 404);
             return;
