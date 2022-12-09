@@ -19,7 +19,11 @@
 -- Table structure for table `SequelizeMeta`
 --
 
-USE candycolor_system;
+DROP DATABASE candycolor_system;
+CREATE DATABASE candycolor_system CHARSET utf8 collate utf8_spanish_ci;
+grant all privileges on candycolor_system.* TO 'dev'@'%';
+flush privileges;
+
 DROP TABLE IF EXISTS `SequelizeMeta`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -60,7 +64,7 @@ CREATE TABLE `clientes` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,6 +73,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+INSERT INTO `clientes` VALUES (1,'PUBLICO EN GENERAL','XAXX010101000','NA','1111111111','NA','NA','NA',85134,'2022-12-09 03:16:55','2022-12-09 03:16:55');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,10 +98,10 @@ CREATE TABLE `detalles` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `idDocumento` (`idDocumento`),
-  KEY `idProducto` (`idProducto`),
-  CONSTRAINT `detalles_ibfk_1` FOREIGN KEY (`idDocumento`) REFERENCES `documento` (`id`),
-  CONSTRAINT `detalles_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`id`)
+  KEY `detalles_FK` (`idProducto`),
+  KEY `detalles_FK_1` (`idDocumento`),
+  CONSTRAINT `detalles_FK` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`id`),
+  CONSTRAINT `detalles_FK_1` FOREIGN KEY (`idDocumento`) REFERENCES `documentos` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -133,12 +138,12 @@ CREATE TABLE `documentos` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `idCliente` (`idCliente`),
-  KEY `idUsuario` (`idUsuario`),
-  KEY `idProveedor` (`idProveedor`),
-  CONSTRAINT `documentos_ibfk_1` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`id`),
-  CONSTRAINT `documentos_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`),
-  CONSTRAINT `documentos_ibfk_3` FOREIGN KEY (`idProveedor`) REFERENCES `proveedor` (`id`)
+  KEY `documentos_FK` (`idCliente`),
+  KEY `documentos_FK_1` (`idProveedor`),
+  KEY `documentos_FK_2` (`idUsuario`),
+  CONSTRAINT `documentos_FK` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`id`),
+  CONSTRAINT `documentos_FK_1` FOREIGN KEY (`idProveedor`) REFERENCES `proveedores` (`id`),
+  CONSTRAINT `documentos_FK_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -202,7 +207,7 @@ CREATE TABLE `proveedores` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,6 +216,7 @@ CREATE TABLE `proveedores` (
 
 LOCK TABLES `proveedores` WRITE;
 /*!40000 ALTER TABLE `proveedores` DISABLE KEYS */;
+INSERT INTO `proveedores` VALUES (1,'PROVEEDOR DE PRUEBA','XAXX010101000','NA','1111111111','NA','123','NA',85134,'2022-12-09 03:17:21','2022-12-09 03:17:21');
 /*!40000 ALTER TABLE `proveedores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,7 +236,7 @@ CREATE TABLE `usuarios` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,4 +258,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-08  2:49:18
+-- Dump completed on 2022-12-08 22:32:30
