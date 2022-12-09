@@ -1,4 +1,4 @@
-const { UsersController, AuthController, DocumentosController, ProductosController, ClientesController, ProveedoresController } = require('./controllers');
+const { UsersController, AuthController, DocumentosController, ProductosController, ClientesController, ProveedoresController, ReportesController } = require('./controllers');
 
 const registerRoutes = (app) => {
     const auth = new AuthController();
@@ -7,6 +7,7 @@ const registerRoutes = (app) => {
     const documentos = new DocumentosController();
     const clientes = new ClientesController();
     const proveedores = new ProveedoresController();
+    const reportes = new ReportesController();
 
     const routes = [
         // auth
@@ -155,6 +156,12 @@ const registerRoutes = (app) => {
             route: '/proveedores/:id',
             callback: proveedores.delete,
         },
+        // Reportes
+        {
+            method: 'get',
+            route: '/reportes/dashboard',
+            callback: reportes.dashboard,
+        }
     ]
 
     for (const { method, route, callback } of routes) {

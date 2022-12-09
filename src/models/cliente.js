@@ -23,7 +23,14 @@ module.exports = (sequelize, DataTypes) => {
     calle: DataTypes.STRING,
     numero: DataTypes.STRING,
     colonia: DataTypes.STRING,
-    codigoPostal: DataTypes.INTEGER
+    codigoPostal: DataTypes.INTEGER,
+    text: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        return `${this.id} - ${this.nombre}`;
+      },
+      set() { }
+    }
   }, {
     sequelize,
     modelName: 'cliente',

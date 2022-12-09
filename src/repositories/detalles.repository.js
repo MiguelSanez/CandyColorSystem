@@ -15,6 +15,14 @@ class DetallesRepository {
         return detalle;
     }
 
+    async findByIdDocumento(idDocumento) {
+        const detalle = await db.detalle.findAll({
+            where: { idDocumento },
+        });
+
+        return detalle;
+    }
+
     async add(detalle) {
         detalle.id = 0;
         return (await detalle.save());

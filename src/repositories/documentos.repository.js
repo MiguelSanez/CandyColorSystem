@@ -3,7 +3,17 @@ const db = require('./../models');
 class DocumentosRepository {
 
     async find() {
-        const documentos = await db.documento.findAll();
+        const documentos = await db.documento.findAll({
+            where: { status: 1 },
+            include: ['cliente'],
+        });
+        return documentos;
+    }
+
+    async findByTipoDocumento(tipoDocumento) {
+        const documentos = await db.documento.findAll({
+            where: { tipoDocumento, status: 1, },
+        });
         return documentos;
     }
 

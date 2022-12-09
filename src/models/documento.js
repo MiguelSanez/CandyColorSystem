@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Documento.belongsTo(models.cliente, { foreignKey: 'idCliente', as: 'cliente' });
     }
   }
   Documento.init({
@@ -26,6 +27,13 @@ module.exports = (sequelize, DataTypes) => {
     impuestos: DataTypes.FLOAT,
     total: DataTypes.FLOAT,
     observaciones: DataTypes.STRING,
+    documento: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        return `${this.serie}-${this.folio}`;
+      },
+      set() { }
+    }
   }, {
     sequelize,
     modelName: 'documento',

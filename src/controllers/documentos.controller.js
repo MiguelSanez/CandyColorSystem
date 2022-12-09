@@ -117,7 +117,8 @@ class DocumentosController {
             return;
         }
 
-        await repo.delete(documento);
+        documento.status = 0;
+        documento.save();
 
         res.json({ deleted: true }, 200);
     }

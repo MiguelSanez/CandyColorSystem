@@ -4,6 +4,7 @@ const ClientesController = require('./clientes.controller');
 const ProveedoresController = require('./proveedores.controller');
 const ProductosController = require('./productos.controller');
 const DocumentosController = require('./documentos.controller');
+const ReportesController = require('./reportes.controller');
 
 module.exports = {
     UsersController,
@@ -11,5 +12,6 @@ module.exports = {
     ProveedoresController,
     ProductosController,
     DocumentosController,
-    AuthController
+    AuthController,
+    ReportesController
 };
