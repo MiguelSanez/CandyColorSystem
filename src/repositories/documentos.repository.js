@@ -30,7 +30,7 @@ class DocumentosRepository {
     async delete(documento) {
         return (await documento.destroy());
     }
-
+    
 
 };
 

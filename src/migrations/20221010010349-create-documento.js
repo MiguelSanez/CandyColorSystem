@@ -35,9 +35,9 @@ module.exports = {
       tipoDocumento: {
         type: Sequelize.INTEGER
       },
-      documentoProveedor: {
-        type: Sequelize.INTEGER
-      },
+      // documentoProveedor: {
+      //   type: Sequelize.INTEGER
+      // },
       status: {
         type: Sequelize.INTEGER
       },

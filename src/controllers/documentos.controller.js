@@ -22,13 +22,21 @@ class DocumentosController {
         res.json(documentos);
     }
 
+    async findByTypeDocument(req, res){
+        const { tipoDocumento } = req.params;
+
+        if (typeof tipoDocumento === 'string' && tipoDocumento.length > 0){
+            const documentos = [];
+        }
+    }
+
     async add(req, res) {
         const documento = new db.documento();
         documento.idCliente = 0;
         documento.idUsuario = 0;
         documento.idProveedor = 0;
         documento.tipoDocumento = 0;
-        documento.documentoProveedor = req.body.documentoProveedor;
+        // documento.documentoProveedor = req.body.documentoProveedor;
         documento.status = req.body.status;
         documento.subtotal = req.body.subtotal;
         documento.impuestos = req.body.impuestos;
@@ -54,7 +62,7 @@ class DocumentosController {
         documento.idUsuario = 0;
         documento.idProveedor = 0;
         documento.tipoDocumento = 0;
-        documento.documentoProveedor = req.body.documentoProveedor;
+        // documento.documentoProveedor = req.body.documentoProveedor;
         documento.status = req.body.status;
         documento.subtotal = req.body.subtotal;
         documento.impuestos = req.body.impuestos;

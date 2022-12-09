@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     idUsuario: DataTypes.INTEGER,
     idProveedor: DataTypes.INTEGER,
     tipoDocumento: DataTypes.INTEGER,
-    documentoProveedor: DataTypes.INTEGER,
+    // documentoProveedor: DataTypes.INTEGER,
     status: DataTypes.INTEGER,
     subtotal: DataTypes.FLOAT,
     impuestos: DataTypes.FLOAT,
