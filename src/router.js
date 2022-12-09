@@ -86,6 +86,11 @@ const registerRoutes = (app) => {
         },
         {
             method: 'get',
+            route: '/documentos/tipo-documento/:id',
+            callback: documentos.findByTipoDocumento,
+        },
+        {
+            method: 'get',
             route: '/documentos/:id',
             callback: documentos.find,
         },

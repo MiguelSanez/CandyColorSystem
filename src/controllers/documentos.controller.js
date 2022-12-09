@@ -41,6 +41,13 @@ class DocumentosController {
         res.json(documentos);
     }
 
+    async findByTipoDocumento(req, res) {
+        const { id } = req.params;
+
+        const documentos = await repo.findByTipoDocumento(id);
+        res.json(documentos);
+    }
+
     async getDocumentoFolio(req, res) {
         const id = parseInt(req.params.id, 10);
         const tipoDocumento = await getDocumentoFolioA(id);
@@ -101,7 +108,16 @@ class DocumentosController {
             detalle.total = subtotal;
             detalle.costo = producto.costo;
             detalle.precio = precio;
+
+            // Venta (0) = restar existencia
+            // Compra (1) = sumar existencia
+            if (tipoDocumento === 0) {
+                producto.existencia -= cantidad;
+            } else if (tipoDocumento === 1) {
+                producto.existencia += cantidad;
+            }
             await repoDetalle.add(detalle);
+            await producto.save();
         }
 
         const json = documento.toJSON();

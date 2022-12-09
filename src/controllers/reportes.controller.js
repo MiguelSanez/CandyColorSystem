@@ -11,8 +11,8 @@ class ReportesController {
     async dashboard(req, res) {
 
         const documentos = await repo.findByTipoDocumento(TIPO_DOCUMENTO.venta);
-        const ventas = [];
-        const utilidades = [];
+        const ventas = [0];
+        const utilidades = [0];
         const labels = [];
 
         let venta = 0;
@@ -30,6 +30,9 @@ class ReportesController {
 
             ventas.push(venta);
             utilidades.push(utilidad);
+            if (!labels.length) {
+                labels.push(documento.createdAt);
+            }
             labels.push(documento.createdAt);
         }
 
