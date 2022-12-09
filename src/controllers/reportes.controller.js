@@ -2,7 +2,7 @@ const { DocumentosRepository, DetallesRepository } = require('../repositories');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { TIPO_DOCUMENTO } = require('../models/documento');
-
+const SimpleCSV = require('./../simple.csv');
 
 const repo = new DocumentosRepository();
 const repoDetalle = new DetallesRepository();
@@ -42,6 +42,75 @@ class ReportesController {
             labels,
         }, 200);
 
+    }
+
+    async generarReporte(req, res) {
+        const { id } = req.params;
+        let blob = null;
+        let filename = `${id}_${new Date().getTime()}.csv`;
+        if (id == 'sales') {
+            // Reporte de ventas (0)
+            const header = ['Documento', 'Fecha', 'Observaciones', 'Cliente', 'Cantidad', 'Producto', 'Subtotal', 'Total'];
+            const csv = new SimpleCSV({ header });
+            const documentos = await repo.findByTipoDocumento(0);
+            for (const documento of documentos) {
+                for (const detalle of documento.detalle) {
+                    csv.push([
+                        documento.documento,
+                        documento.createdAt,
+                        documento.observaciones,
+                        documento.cliente.text,
+                        detalle.cantidad,
+                        detalle.descripcion,
+                        detalle.subtotal,
+                        detalle.total
+                    ]);
+                }
+            }
+            blob = Buffer.from(csv.generate()).toString('base64')
+        } else if (id == 'suppliers') {
+            // Reporte de compras por proveedor (1)
+            const header = ['Documento', 'Fecha', 'Observaciones', 'Proveedor', 'Cantidad', 'Producto', 'Subtotal', 'Total'];
+            const csv = new SimpleCSV({ header });
+            const documentos = await repo.findByTipoDocumento(1);
+            for (const documento of documentos) {
+                for (const detalle of documento.detalle) {
+                    csv.push([
+                        documento.documento,
+                        documento.createdAt,
+                        documento.observaciones,
+                        documento.proveedor.text,
+                        detalle.cantidad,
+                        detalle.descripcion,
+                        detalle.subtotal,
+                        detalle.total
+                    ]);
+                }
+            }
+            blob = Buffer.from(csv.generate()).toString('base64')
+        } else if (id == 'customers') {
+            // Reporte de pedidos de clientes (2)
+            const header = ['Documento', 'Fecha', 'Observaciones', 'Cliente', 'Cantidad', 'Producto', 'Subtotal', 'Total'];
+            const csv = new SimpleCSV({ header });
+            const documentos = await repo.findByTipoDocumento(2);
+            for (const documento of documentos) {
+                for (const detalle of documento.detalle) {
+                    csv.push([
+                        documento.documento,
+                        documento.createdAt,
+                        documento.observaciones,
+                        documento.cliente.text,
+                        detalle.cantidad,
+                        detalle.descripcion,
+                        detalle.subtotal,
+                        detalle.total
+                    ]);
+                }
+            }
+            blob = Buffer.from(csv.generate()).toString('base64')
+        }
+
+        return res.json({ blob, filename }, 201);
     }
 }
 

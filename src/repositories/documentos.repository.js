@@ -13,7 +13,7 @@ class DocumentosRepository {
     async findByTipoDocumento(tipoDocumento) {
         const documentos = await db.documento.findAll({
             where: { tipoDocumento, status: 1, },
-            include: ['cliente', 'proveedor'],
+            include: ['cliente', 'proveedor', 'detalle'],
         });
         return documentos;
     }

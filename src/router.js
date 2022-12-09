@@ -166,7 +166,12 @@ const registerRoutes = (app) => {
             method: 'get',
             route: '/reportes/dashboard',
             callback: reportes.dashboard,
-        }
+        },
+        {
+            method: 'get',
+            route: '/reportes/:id',
+            callback: reportes.generarReporte,
+        },
     ]
 
     for (const { method, route, callback } of routes) {

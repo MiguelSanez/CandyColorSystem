@@ -18,6 +18,7 @@ class DetallesRepository {
     async findByIdDocumento(idDocumento) {
         const detalle = await db.detalle.findAll({
             where: { idDocumento },
+            includes: ['documento'],
         });
 
         return detalle;
