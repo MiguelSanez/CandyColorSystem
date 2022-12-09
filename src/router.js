@@ -49,6 +49,11 @@ const registerRoutes = (app) => {
         // productos
         {
             method: 'get',
+            route: '/productos/codigo/:codigo',
+            callback: productos.findByCodigo,
+        },
+        {
+            method: 'get',
             route: '/productos/:id',
             callback: productos.find,
         },
@@ -75,6 +80,11 @@ const registerRoutes = (app) => {
         // documentos
         {
             method: 'get',
+            route: '/documentos/folio/:id',
+            callback: documentos.getDocumentoFolio
+        },
+        {
+            method: 'get',
             route: '/documentos/:id',
             callback: documentos.find,
         },
@@ -87,11 +97,6 @@ const registerRoutes = (app) => {
             method: 'post',
             route: '/documentos',
             callback: documentos.add,
-        },
-        {
-            method: 'put',
-            route: '/documentos/:id',
-            callback: documentos.update,
         },
         {
             method: 'delete',

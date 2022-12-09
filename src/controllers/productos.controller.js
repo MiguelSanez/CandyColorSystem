@@ -22,6 +22,18 @@ class ProductosController {
         res.json(productos);
     }
 
+    async findByCodigo(req, res) {
+        const { codigo } = req.params;
+
+        const producto = await repo.findOneByCodigo(codigo);
+        if (!producto) {
+            res.json({ message: 'Not found' }, 404);
+            return;
+        }
+
+        res.json(producto);
+    }
+
     async add(req, res) {
         const producto = new db.producto();
         producto.esMateria = req.body.esMateria;

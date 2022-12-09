@@ -15,6 +15,15 @@ class DocumentosRepository {
         return documento;
     }
 
+    async findFolioByType(tipoDocumento) {
+        const folio = await db.documento.count({
+            where: {
+                tipoDocumento,
+            }
+        });
+        return folio + 1;
+    }
+
     async add(documento) {
         documento.id = 0;
         return (await documento.save());
@@ -30,7 +39,7 @@ class DocumentosRepository {
     async delete(documento) {
         return (await documento.destroy());
     }
-    
+
 
 };
 

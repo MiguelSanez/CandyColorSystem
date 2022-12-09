@@ -15,6 +15,14 @@ class ProductosRepository {
         return producto;
     }
 
+    async findOneByCodigo(codigo) {
+        const producto = await db.producto.findOne({
+            where: { codigo },
+        });
+
+        return producto;
+    }
+
     async add(producto) {
         producto.id = 0;
         return (await producto.save());

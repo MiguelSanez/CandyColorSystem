@@ -19,13 +19,13 @@ module.exports = (sequelize, DataTypes) => {
     idProveedor: DataTypes.INTEGER,
     tipoDocumento: DataTypes.INTEGER,
     // documentoProveedor: DataTypes.INTEGER,
+    serie: DataTypes.STRING,
+    folio: DataTypes.INTEGER,
     status: DataTypes.INTEGER,
     subtotal: DataTypes.FLOAT,
     impuestos: DataTypes.FLOAT,
     total: DataTypes.FLOAT,
     observaciones: DataTypes.STRING,
-    serie: DataTypes.STRING,
-    folio: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'documento',
@@ -34,4 +34,20 @@ module.exports = (sequelize, DataTypes) => {
   return Documento;
 };
 
-module.exports.TIPO_DOCUMENTO = {'VENTA':0, 'COMPRA':1, 'PEDIDO':2};
+module.exports.TIPO_DOCUMENTO = {
+  venta: {
+    id: 0,
+    nombre: 'Venta',
+    serie: 'T',
+  },
+  compra: {
+    id: 1,
+    nombre: 'Compra',
+    serie: 'C',
+  },
+  pedido: {
+    id: 2,
+    nombre: 'Pedido',
+    serie: 'P',
+  }
+};

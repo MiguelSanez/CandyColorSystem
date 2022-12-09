@@ -12,7 +12,7 @@ module.exports = {
       idCliente: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'cliente',
+          model: 'clientes',
           key: 'id',
         },
         allowNull: true,
@@ -20,14 +20,14 @@ module.exports = {
       idUsuario: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'usuario',
+          model: 'usuarios',
           key: 'id',
         }
       },
       idProveedor: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'proveedor',
+          model: 'proveedores',
           key: 'id',
         },
         allowNull: true,
@@ -52,12 +52,6 @@ module.exports = {
       },
       observaciones: {
         type: Sequelize.STRING
-      },
-      serie: {
-        type: Sequelize.STRING
-      },
-      folio: {
-        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
